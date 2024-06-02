@@ -8,6 +8,7 @@ function App() {
   let [tumb, setTumb] = useState([0,0,0]);
   let [modal, setModal] = useState(false);
   let [modalTitle, setModalTitle] = useState(0);
+  let [inputValue, setInputValue] = useState('');
 
   return (
     <div className="App">
@@ -43,11 +44,22 @@ function App() {
                 }}>👍</span>{tumb[i]}
               </h4>
               <p>2월 17일 발행</p>
+              <button onClick={()=>{
+                let copy = [...title];
+                copy.splice(i, 1);
+                setTitle(copy);
+              }}>삭제</button>
             </div>
           )
         })
       }
 
+      <input onChange={(e)=>{setInputValue(e.target.value);}}></input>
+      <button onClick={()=>{
+        let copy = [...title];
+        copy.unshift(inputValue);
+        setTitle(copy)
+      }}>글 발행</button>
       {
         modal == true ? <Modal modalTitle = {modalTitle} title={title} setTitle={setTitle}/> : null
       }
